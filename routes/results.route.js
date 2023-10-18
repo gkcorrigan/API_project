@@ -3,7 +3,19 @@ import ResultsController from "../controllers/results.controller.js";
 
 
 
+
 const newServer = express.Router();
+
+newServer.get('/api/request-logs', async (req, res) => {
+  try {
+    const requestLogs = await ResultsController.getRequestLogs();
+    res.json(requestLogs);
+  } catch(error) {
+    console.error('Internal Error fetching request logs:', error);
+    res.status(500).send('Internal Server Error');
+  }
+
+  });
 
 newServer.get('/:id?', async (req, res) => {
     try {
@@ -56,5 +68,7 @@ newServer.get('/:id?', async (req, res) => {
       res.status(500).send('Internal Server Error');
     }
   });
+
+  
 
 export default newServer;

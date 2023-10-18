@@ -5,7 +5,7 @@ import query from "../config/db.query.js"
   return query(`SELECT * FROM countymarathon WHERE runnerID = ?`, [id]);
  }
  const getMarathonResults = async () => {
-   return('SELECT * FROM countymarathon');
+   return query('SELECT * FROM countymarathon');
   };
   
   // insert a new marathon result
@@ -20,16 +20,19 @@ import query from "../config/db.query.js"
   }
 //delete a peice of data in the marathon result 
   const deleteMarathonResult = async (id) => {
-    return query("DELETE FROM products WHERE runnerID =?", [id]);
+    return query("DELETE FROM countymarathon WHERE runnerID =?", [id]);
   }
   
+  const getRequestLogs = async() => {
+    return query("SELECT * FROM request_logs");
+  };
   module.exports = {
     getSingleMarathonResult,
     getMarathonResults,
     insertMarathonResult,
     updateMarathonResult,
-    deleteMarathonResult
-
+    deleteMarathonResult,
+    getRequestLogs
   };
 
 
