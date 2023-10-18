@@ -1,5 +1,5 @@
 import express from "express"
-const { default: config } = require("./config");
+import config from "./config";
 import router from "./routes";
 
 const newServer = express();

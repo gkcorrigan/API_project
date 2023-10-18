@@ -16,7 +16,7 @@ newServer.get('/:id?', async (req, res) => {
         data = await ResultsController.getMarathonResults();
       }
       res.json(data);
-      
+
     } catch (error) {
       console.error(error);
       res.status(500).send('Internal Server Error');
@@ -57,6 +57,4 @@ newServer.get('/:id?', async (req, res) => {
     }
   });
 
-newServer.listen(5000, () => {
-    console.log("Testing new server");
-});
+export default newServer;

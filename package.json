@@ -4,12 +4,23 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon --exec babel-node --plugins=@babel/plugin-transform-modules-commonjs --trace-uncaught --async-stack-traces server.js",
+    "build": "babel --ignore dist,public,node_modules --plugins=@babel/transform-modules-commonjs ../server -s -d dist"
   },
   "author": "Graeme Corrigan",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "mysql2": "^3.6.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.23.0",
+    "@babel/core": "^7.23.2",
+    "@babel/node": "^7.22.19",
+    "@babel/plugin-transform-modules-commonjs": "^7.23.0",
+    "nodemon": "^3.0.1"
   }
 }
