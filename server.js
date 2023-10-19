@@ -1,8 +1,15 @@
-import express from "express"
-import config from "./config";
-import router from "./routes";
-import query from "./config/db.query";
-import requestLogsRouter from "./routes/requestLogs.routes";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
+import express from "express";
+import path from "path";
+import config from "./config/index.js";
+import router from "./routes/index.js";
+import query from "./config/db.query.js";
+import requestLogsRouter from "./routes/requestLogs.routes.js";
+import "./server.js";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const newServer = express();
 
@@ -27,6 +34,12 @@ newServer.use("/api", router);
 
 newServer.use("/api/request-logs", requestLogsRouter);
 
+newServer.use(express.static(path.join(__dirname, 'client', 'build')));
+
+newServer.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+});
+
 
 newServer.use((err, req, res, next) => {
   console.error(err);
@@ -39,6 +52,7 @@ newServer.use((err, req, res, next) => {
   }
 });
 
+const port = config.port || 5000;
 newServer.listen(config.port, () => {
-  console.log(`Server listening on port ${config.port}...`);
+  console.log(`Server listening on port ${port}...`);
 });

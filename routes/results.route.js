@@ -1,5 +1,5 @@
 import express from "express";
-import ResultsController from "../controllers/results.controller.js";
+import * as ResultsController from "../controllers/results.controller.js";
 
 
 

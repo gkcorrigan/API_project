@@ -1,6 +1,6 @@
 import express from "express";
 
-import resultsRouter from "./results.route";
+import resultsRouter from "./results.route.js";
 
 
 const router = express.Router();

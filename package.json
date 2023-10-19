@@ -2,11 +2,12 @@
   "name": "api-proj",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon --exec babel-node --plugins=@babel/plugin-transform-modules-commonjs --trace-uncaught --async-stack-traces server.js",
-    "build": "babel --ignore dist,public,node_modules --plugins=@babel/transform-modules-commonjs ../server -s -d dist"
+    "dev": "nodemon --exec babel-node --trace-uncaught --async-stack-traces server.js",
+    "build": "babel --ignore dist,public,node_modules client -d dist"
   },
   "author": "Graeme Corrigan",
   "license": "ISC",
@@ -20,7 +21,12 @@
     "@babel/cli": "^7.23.0",
     "@babel/core": "^7.23.2",
     "@babel/node": "^7.22.19",
-    "@babel/plugin-transform-modules-commonjs": "^7.23.0",
+    "@babel/preset-env": "^7.23.2",
     "nodemon": "^3.0.1"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
   }
 }
