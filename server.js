@@ -1,18 +1,16 @@
-import { fileURLToPath } from "url";
-import { dirname } from "path";
 import express from "express";
-import path from "path";
+import cors from "cors";
 import config from "./config/index.js";
 import router from "./routes/index.js";
 import query from "./config/db.query.js";
 import requestLogsRouter from "./routes/requestLogs.routes.js";
 import "./server.js";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+
 
 const newServer = express();
 
+newServer.use(cors());
 newServer.use(express.json());
 
 const logRequest = async (req, res, next) => {
@@ -27,6 +25,8 @@ const logRequest = async (req, res, next) => {
   }
 };
 
+
+
 newServer.use(logRequest);
 
 
@@ -34,11 +34,6 @@ newServer.use("/api", router);
 
 newServer.use("/api/request-logs", requestLogsRouter);
 
-newServer.use(express.static(path.join(__dirname, 'client', 'build')));
-
-newServer.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
-});
 
 
 newServer.use((err, req, res, next) => {
